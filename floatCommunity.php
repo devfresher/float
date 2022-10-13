@@ -24,7 +24,7 @@ $floatUsers = $user->getFloatUsers();
                                                 <div class="menu-header-image opacity-2"
                                                     style="background-image: url('assets/images/dropdown-header/abstract1.jpg');">
                                                 </div>
-                                                <div class="menu-header-content btn-pane-right">
+                                                <div class="menu-header-content">
                                                     <div class="avatar-icon-wrapper mr-3 avatar-icon-xl btn-hover-shine">
                                                         <div class="avatar-icon rounded">
                                                             <img src="<?php echo BASE_URL ?>assets/images/avatars/default-avatar.png"
@@ -36,9 +36,13 @@ $floatUsers = $user->getFloatUsers();
                                                         <small class="menu-header-subtitle">Community Member</small>
                                                     </div>
                                                     <div class="menu-header-btn-pane">
-                                                        <a href="" class="btn-wide btn-hover-shine btn btn-success">
+                                                        <a href="" class="btn-wide btn-hover-shine btn btn-success btn-sm">
                                                             <i class="fa fa-whatsapp"></i>
                                                             Chat
+                                                        </a>
+
+                                                        <a href="" class="btn-wide btn-hover-shine btn btn-warning btn-sm">
+                                                            Report
                                                         </a>
                                                     </div>
                                                 </div>
@@ -52,7 +56,7 @@ $floatUsers = $user->getFloatUsers();
                                                             <button
                                                                 class="btn-icon-vertical btn-square btn-transition br-bl btn btn-outline-link">
                                                                 <strong class="d-block" style="font-size: 21px;"><?php echo number_format($user->userMeta->float_wallet, 2) ?></strong>
-                                                                Float Balance
+                                                                Balance available for sale
                                                             </button>
                                                         </div>
                                                     </div>
