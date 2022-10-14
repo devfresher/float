@@ -1,0 +1,73 @@
+.menu-header-title {
+    font-size: 14px;
+}
+
+.avatar-icon-xl .avatar-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* CSS BY KOLADE & DANIEL */
+.app-header .app-header__content {
+    background: #FFC000;
+}
+.app-theme-white.fixed-header .app-header__logo {
+    background: #FFC000;
+}
+h5 {
+    color: white;
+}
+.widget-content .widget-content-left .widget-heading {
+    color: white;
+}
+.widget-content .widget-content-left .widget-subheading {
+    color: white;
+    opacity: 1.5;
+}
+.hamburger--elastic .hamburger-inner::after, .hamburger--elastic .hamburger-inner::before, .hamburger--elastic .hamburger-inner {
+    background-color: white;
+}
+.hamburger--elastic.is-active .hamburger-inner::after, .hamburger--elastic.is-active .hamburger-inner {
+    background-color: white;
+}
+.header-btn-lg::before {
+    background: white;
+}
+.d-inline-block {
+    color: #3F6AD8;
+    font-weight: bold;
+}
+.d-inline-block strong {
+    font-weight: bold;
+    color: #3F6AD8;
+    text-transform: uppercase;
+}
+.lnr-apartment:before {
+    color: #3F6AD8;
+    font-weight: bold;
+}
+.app-sidebar .scrollbar-sidebar {
+    background: #FFC000;
+}
+.vertical-nav-menu li a {
+    color: white;
+    font-size: 16px;
+}
+.pe-7s-angle-down:before {
+    color: white;
+}
+.vertical-nav-menu ul>li>a {
+    color: #696969  ;
+}
+.btn-group>.btn:not(:last-child):not(.dropdown-toggle), .btn-group>.btn-group:not(:last-child)>.btn {
+    background: transparent;
+}
+.btn:not(:disabled):not(.disabled) {
+    background: #3F6AD8;
+}
+.closed-sidebar.closed-sidebar-mobile .app-header {
+    background: #FFC000;
+}
+.bg-info {
+    background-color: #ffc000 !important;
+}
