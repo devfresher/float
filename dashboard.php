@@ -3,8 +3,8 @@ require_once MODEL_DIR."Banks.php";
 $banks = new Banks($db);
 
 $fullUserInfo = $userInfo;
-$wallets = $userInfo->userMeta;
-$monnify =  $wallets->monnify; ?>
+$wallets = $userInfo->userMeta->wallets;
+$monnify =  $userInfo->userMeta->monnify; ?>
 
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         

@@ -1,5 +1,6 @@
 <?php
 require "config.php";
+// session_destroy();
 // require_once MODEL_DIR.'Authorization.php';
 
 // $auth = new Authorization($db);

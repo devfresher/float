@@ -18,7 +18,7 @@ class User extends Utility {
 
     public function createMember($userData) {
         try {
-            $userData['monnify_ref'] = $this->randID(12, 'numeric');
+            $userData['monnify_ref'] = $this->randID('numeric', 12);
             $createUser = $this->db->insert($this->table->users, $userData);
             
             // User id of the member created
@@ -80,12 +80,9 @@ class User extends Utility {
         return $this->responseBody;
     }
 
-    function getUserByUsername($username) {
-        // $plan = new Plan($this->db);
-        // $role = new Role($this->db);
-        // $wallet = new Wallet($this->db);
+    function getUserByEmailAddress($emailaddress) {
 
-        $result = $this->db->getSingleRecord($this->table->users, "*", "AND username = '$username'");
+        $result = $this->db->getSingleRecord($this->table->users, "*", "AND email = '$emailaddress'");
         
         if ($result) {
             $userId = $result['id'];
@@ -128,8 +125,21 @@ class User extends Utility {
         try {
             $result = $this->db->getSingleRecord($this->table->users, "*", "AND id = '$userId'");
             if ($result) {
-                $this->responseBody = $this->arrayToObject($result);
-                $this->responseBody->userMeta = $this->getUserMeta($userId);
+                $theUser = $this->arrayToObject($result);
+                $userMeta = $this->arrayToObject($this->getUserMeta($userId));
+                
+                $wallets = [
+                    "main_wallet" => $userMeta->main_wallet,
+                    "cashback_wallet" => $userMeta->cashback_wallet,
+                    "referral_wallet" => $userMeta->referral_wallet,
+                    "wallet_funding_bonus" => $userMeta->wallet_funding_bonus,
+                    "float_wallet" => $userMeta->float_wallet,
+                    "winning_wallet" => $userMeta->winning_wallet
+                ];
+                $theUser->userMeta = $userMeta;
+                $theUser->userMeta->wallets = $this->arrayToObject($wallets);
+
+                $this->responseBody = $theUser;
             }
             else {
                 $this->responseBody = false;
@@ -147,7 +157,7 @@ class User extends Utility {
         foreach($result as $index => $value) {
             $meta[$result[$index]['key']] = $result[$index]['value'];
         }
-        return $this->arrayToObject($meta);
+        return $meta;
     }
 
     public function hashPassword($password) {
@@ -210,7 +220,7 @@ class User extends Utility {
 
         if (count($allUsers) > 0) {
             foreach ($allUsers as $index => $user) {
-                if ($user->userMeta->float_wallet > 0) {
+                if (!empty($user->userMeta->float_settings)) {
                     $floatingUsers[] = $user;
                 }
             }
@@ -223,37 +233,39 @@ class User extends Utility {
     }
     
     public function updateUser($userData, $userId) {
+        try {
+            $this->db->beginTransaction();
+            if(array_key_exists("user_meta", $userData)) {
+                
+                $userMeta = $userData['user_meta'];
+                unset($userData['user_meta']);
 
-        if(array_key_exists("user_meta", $userData)) {
-                        
-            $userMeta = $userData['user_meta'];
-            unset($userData['user_meta']);
+                if (!empty($userData)) {
+                    $this->db->update($this->table->users, $userData, ['id' => $userId]);
+                }
+                
+                foreach($userMeta as $metaKey => $metaValue) {
+                    $searchMeta = $this->db->getRecFrmQry("select * from ".$this->table->usermeta." where `key` = '$metaKey' AND user_id = '$userId'");
 
-            $isUpdated = $this->db->update($this->table->users, $userData, ['id' => $userId]);
-
-            foreach($userMeta as $metaKey => $metaValue) {
-
-                $searchMeta = $this->db->getRecFrmQry("select * from ".$this->table->usermeta." where `key` = '$metaKey' AND user_id = '$userId'");
-
-                if(count($searchMeta) > 0) {                
-                    $metaValue = ['value' => $metaValue];
-                    $this->db->update_new($this->table->usermeta, $metaValue , " AND `key` ='".$metaKey."' AND `user_id` = '$userId'");
-                } else {
-                    $this->db->insert($this->table->usermeta, ['`key`' => $metaKey, 'value' => $metaValue, 'user_id' => $userId]);
+                    if(count($searchMeta) > 0) {                
+                        $metaValue = ['value' => $metaValue];
+                        $this->db->update_new($this->table->usermeta, $metaValue , " AND `key` ='".$metaKey."' AND `user_id` = '$userId'");
+                    } else {
+                        $this->db->insert($this->table->usermeta, ['`key`' => $metaKey, 'value' => $metaValue, 'user_id' => $userId]);
+                    }
                 }
             }
-        }
-        else {
-            $isUpdated = $this->db->update($this->table->users, $userData, ['id' => $userId]);
-        }
+            else {
+                $this->db->update($this->table->users, $userData, ['id' => $userId]);
+            }
 
-        if($isUpdated) {
+            $this->db->commit();
             $this->responseBody = true;
-        }
-        else {
+        } catch (\Throwable $error) {
+            $this->db->rollBack();
             $this->responseBody = false;
         }
-        return $this->responseBody;
 
+        return $this->responseBody;
     }
 }

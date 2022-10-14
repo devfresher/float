@@ -35,7 +35,7 @@ class Utility extends Database {
 
     }
 
-    public function randID($length = 5, $character) { 
+    public function randID($character, $length = 5) { 
         $alphabets = 'aeioubcdfghjklmnpqrstvwxyz'; 
         $numbers = '0123456789'; 
 
@@ -105,6 +105,16 @@ class Utility extends Database {
             unset($_SESSION['formErrorMessage']);
             return $formError;
         }
+    }
+
+    public function loadTransactionPinInput()
+    {
+        $html = '<div class="position-relative form-group transctPinDiv d-none">';
+            $html .= '<label>Transaction Pin</label>';
+            $html .= '<input type="password" class="form-control pin" name="pin" id="pin" minlength="4" maxlength="4">';
+        $html .= '</div>';
+
+        echo $html;
     }
 
     public function displayFormSuccess()

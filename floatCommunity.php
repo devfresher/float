@@ -16,7 +16,9 @@ $floatUsers = $user->getFloatUsers();
                     <?php include_once COMPONENT_DIR.'breadcrumb.php' ?>
                     <div class="row">
                         <?php if ($floatUsers) {
-                            foreach ($floatUsers as $index => $user) { ?>
+                            foreach ($floatUsers as $index => $user) {
+                                $userFloatSettings = json_decode($user->userMeta->float_settings) ?>
+
                                 <div class="col-sm-12 col-md-6 col-xl-3">
                                     <div class="card-shadow-primary card-border mb-3 profile-responsive card">
                                         <div class="dropdown-menu-header">
@@ -41,7 +43,7 @@ $floatUsers = $user->getFloatUsers();
                                                             Chat
                                                         </a>
 
-                                                        <a href="" class="btn-wide btn-hover-shine btn btn-warning btn-sm">
+                                                        <a href="createTicket?type=float&userId=<?php echo $user->id;?>" class="btn-wide btn-hover-shine btn btn-warning btn-sm">
                                                             Report
                                                         </a>
                                                     </div>
@@ -55,8 +57,8 @@ $floatUsers = $user->getFloatUsers();
                                                         <div class="col-sm-12">
                                                             <button
                                                                 class="btn-icon-vertical btn-square btn-transition br-bl btn btn-outline-link">
-                                                                <strong class="d-block" style="font-size: 21px;"><?php echo number_format($user->userMeta->float_wallet, 2) ?></strong>
-                                                                Balance available for sale
+                                                                <strong class="d-block" style="font-size: 21px;"><?php echo number_format($userFloatSettings->float_amount, 2) ?></strong>
+                                                                Available for Sale
                                                             </button>
                                                         </div>
                                                     </div>

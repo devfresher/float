@@ -73,8 +73,8 @@
                                     <div class="form-row">
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
-                                                <label>Username</label>
-                                                <input name="username" placeholder="Enter username" type="text" class="form-control form-control-lg">
+                                                <label>Mobile Number</label>
+                                                <input name="username" placeholder="Enter mobile number" type="text" class="form-control form-control-lg">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
