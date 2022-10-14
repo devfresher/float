@@ -9,10 +9,16 @@
 
 /* CSS BY KOLADE & DANIEL */
 .app-header .app-header__content {
-    background: #FFC000;
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
 }
 .app-theme-white.fixed-header .app-header__logo {
-    background: #FFC000;
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
 }
 h5 {
     color: white;
@@ -42,12 +48,22 @@ h5 {
     color: #3F6AD8;
     text-transform: uppercase;
 }
+.vertical-nav-menu li a {
+    font-weight: bold;
+}
+.pe-7s-graph:before, .pe-7s-wallet:before, .pe-7s-paint-bucket:before, .pe-7s-rocket:before, .pe-7s-note2:before, .pe-7s-user:before {
+    font-weight: bold;
+} 
+
 .lnr-apartment:before {
     color: #3F6AD8;
     font-weight: bold;
 }
 .app-sidebar .scrollbar-sidebar {
-    background: #FFC000;
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
 }
 .vertical-nav-menu li a {
     color: white;
@@ -66,8 +82,58 @@ h5 {
     background: #3F6AD8;
 }
 .closed-sidebar.closed-sidebar-mobile .app-header {
-    background: #FFC000;
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
 }
-.bg-info {
-    background-color: #ffc000 !important;
+.bg-info { 
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
+}
+.card-custom-bg {
+    background-color: #ffcc00;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
+}
+
+.widget-title  {
+   color: #ffffff;
+   opacity: 0;
+}
+.opacity-5 {
+    opacity: 100 !important;
+}
+.widget-chart2 .widget-chart-flex {  color: #ffffff;
+}
+.app-main .app-main__inner{
+    background-color: #E1E9FF;
+}
+.sidebar-mobile-open .app-sidebar .app-sidebar__inner ul li a {
+    padding: 0 20px 0 10px;
+}
+.vertical-nav-menu li a {
+    padding: 0 3.5rem 0 15px;
+}
+.vertical-nav-menu li a:hover {
+    background: #e0f3ff;
+    text-decoration: none;
+    color: #3F6AD8;
+}
+.widget-content .widget-content-left .widget-subheading {
+    font-weight: bold;
+}
+.widget-content .widget-content-left .widget-heading {
+    color: white;
+    opacity: 100 !important;
+}
+.opacity-8 {
+    opacity: 100 !important;
+    color: white;
+}
+.btn-dark {
+    border-color: #3F6AD8;
 }
