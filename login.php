@@ -5,7 +5,7 @@
             <div class="h-100">
                 <div class="h-100 no-gutters row">
                     <div class="d-none d-lg-block col-lg-4">
-                        <div class="slider-light">
+                        <!-- <div class="slider-light">
                             <div class="slick-slider">
                                 <div>
                                     <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-plum-plate"
@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
@@ -88,8 +88,6 @@
                                     <div class="divider row"></div>
                                     <div class="d-flex align-items-center">
                                         <div class="ml-auto">
-                                            <a href="javascript:void(0);" class="btn-lg btn btn-link">Recover
-                                                Password</a>
                                             <button class="btn btn-primary btn-lg" type="submit" name="logAccount"><b><i class="fa fa-paper-plane"></i>
                                                     Login to Dashboard</b></button>
                                         </div>
