@@ -61,6 +61,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-4 d-flex align-items-center">
+                                        <h5 class="mb-0" style="color: #000">Already have an account? <a href="login" class="text-primary"> Sign in </a></h5>
                                         <div class="ml-auto">
                                             <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="submit" name="createAccount">
                                                 Create Account </button>
@@ -71,24 +72,7 @@
                         </div>
                     </div>
                     <div class="d-lg-flex d-xs-none col-lg-5">
-                        <div class="slider-light">
-                            <div class="slick-slider slick-initialized">
-                                <div>
-                                    <div class="position-relative h-100 d-flex justify-content-center align-items-center bg-premium-dark"
-                                        tabindex="-1">
-                                        <div class="slide-img-bg"
-                                            style="background-image: url('assets/images/originals/citynights.jpg');">
-                                        </div>
-                                        <div class="slider-content">
-                                            <h3>Scalable, Modular, Consistent</h3>
-                                            <p>Easily exclude the components you don't require. Lightweight, consistent
-                                                Bootstrap based styles across all elements and components
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

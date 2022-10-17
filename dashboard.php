@@ -26,7 +26,7 @@ $monnify =  $wallets->monnify; ?>
                         ?>
                         
                             <div class="col-md-6 col-lg-3">
-                                <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card">
+                                <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card card-custom-bg">
                                     <div class="widget-chat-wrapper-outer">
                                         <div class="widget-chart-content">
                                             <div class="widget-title opacity-5 text-uppercase"><?php echo ucwords(str_replace("_", " ", $headerIndex));?></div>
@@ -46,7 +46,7 @@ $monnify =  $wallets->monnify; ?>
                         foreach(json_decode($monnify, true) as $bankId => $accountNo) { ?>
                             
                             <div class="col-md-6 col-lg-3">
-                                <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card">
+                                <div class="widget-chart widget-chart2 text-left mb-3 card-btm-border card-shadow-primary border-primary card card-custom-bg">
                                     <div class="widget-chat-wrapper-outer">
                                         <div class="widget-chart-content">
                                             <div class="widget-title opacity-5 text-uppercase"><?php echo $banks->getAutoBankByCode($bankId)->bank_name;?></div>
