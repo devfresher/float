@@ -204,69 +204,6 @@ else {
             header("Location: ".$_SERVER['HTTP_REFERER']);
             exit();
         }
-    } 
-    else if(isset($_POST["updateFloatSettings"])) {
-        $myFilters = [
-            'sell_on_float' => [
-                'sanitizations' => 'string|trim',
-                'validations' => 'required',
-            ],
-            'amount' => [
-                'sanitizations' => 'float',
-                'validations' => 'number|required',
-            ]
-        ];
-    
-        $validator = new Validator($myFilters);
-        $validationResults = $validator->run($_POST);
-    
-        if ($validationResults === FALSE) {
-            $validationErrors = $validator->getValidationErrors();
-            foreach ($validationErrors as $error) {
-                $_SESSION['formErrorMessage'][] = $error;
-            }
-            header("Location: ".$_SERVER['HTTP_REFERER']);
-            exit();   
-        }
-        else {
-            $sanitizedInputData = $validationResults;
-
-            $amount = $sanitizedInputData['amount'];
-            $sellOnFLoat = isset($sanitizedInputData['sell_on_float']) ? true:false;
-
-            $floatBalance = $user->loggedInUser()->wallets->float_wallet;
-            if ($floatBalance < $amount) {
-                $_SESSION['errorMessage'] = "Insufficient Float Balance";
-                $_SESSION['titleMessage'] = "Error";
-            } else {
-                $floatBalance -= $amount;
-                
-                $userData = [
-                    "user_meta" => [
-                        "float_settings" => json_encode([
-                            "float_amount" =>$amount,
-                            "sell_on_float" =>$sellOnFLoat
-                        ]),
-                        "float_wallet" => $floatBalance
-                    ]
-                ];
-
-                $updateUser = $user->updateUser($userData, $user->loggedInUser()->id);
-                
-                if($updateUser) {
-                    $_SESSION['successMessage'] = $language->updated;
-                    $_SESSION['titleMessage'] = "Success";
-                }
-                else {
-                    $_SESSION['errorMessage'] = $language->request_failed;
-                    $_SESSION['titleMessage'] = "Error";
-                }
-            }
-            
-        }
-
-        header("Location: ".$_SERVER['HTTP_REFERER']);
-        exit();
     }
 }
     

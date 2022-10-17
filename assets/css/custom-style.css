@@ -137,3 +137,38 @@ h5 {
 .btn-dark {
     border-color: #3F6AD8;
 }
+strong .d-block .btn-transition{
+    color: #ffcc00 !important;
+}
+.btn:not(:disabled):not(.disabled){
+    color: white;
+    border-radius: 5px !important;
+}
+.btn-transition {
+    color: #ffffff;
+}
+.dropdown-menu-header .menu-header-image {
+    border-radius: 15px !important;
+    padding-bottom: 50px;
+}
+.col-lg-4 {
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
+}
+.col-lg-8 {
+    background-color: #e2e2ff  !important;
+}
+.bg-white {
+    background-color: #e2e2ff  !important;
+}
+.col-lg-5 {
+    background-color: #ffcc00 !important;
+    background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
+    background-size: cover;
+    background: #ffcc00;
+}
+.app-login-box h4 div {
+    opacity: 100 !important;
+}

@@ -20,34 +20,38 @@ if (PAGE_NAME == 'logout') {
         }
     }
     else {
-        $userInfo = $user->loggedInUser();
-
-        if($userInfo->transact_pin == '0000') {
-            if(PAGE_SLUG != 'modifyTransactPIN') {
-                header("location: ".BASE_URL."modifyTransactPIN");
+        if($user->isLoggedIn()) {
+            $userInfo = $user->loggedInUser();
+    
+            if($userInfo->transact_pin == '0000') {
+                if(PAGE_SLUG != 'modifyTransactPIN') {
+                    header("location: ".BASE_URL."modifyTransactPIN");
+                }
             }
+    
+            if (PAGE_ACCESS_TYPE == 'admin') {
+                if ($user->isLoggedIn()) {
+                    // if($auth->hasPagePermission($user->currentUser->id, PAGE_NAME) == false){
+                    //     $utility->redirectToLandingPage();
+                    // } else {
+                    //     if($auth->isAuthorized(PAGE_NAME) === false) {
+                    //         $utility->showAuthorizeForm(PAGE_NAME);
+                    //     }
+                    // }
+                } else {
+                    header('Location: '.BASE_URL.'login');
+                }
+            } 
+            
+            elseif (PAGE_ACCESS_TYPE == 'user') {
+                if ($user->isLoggedIn() === false) {
+                    header('Location: '.BASE_URL.'login');
+                }
+            }
+        } else {
+            header("location: ".BASE_URL."logout");
+            exit;
         }
-
-        if (PAGE_ACCESS_TYPE == 'admin') {
-            if ($user->isLoggedIn()) {
-                // if($auth->hasPagePermission($user->currentUser->id, PAGE_NAME) == false){
-                //     $utility->redirectToLandingPage();
-                // } else {
-                //     if($auth->isAuthorized(PAGE_NAME) === false) {
-                //         $utility->showAuthorizeForm(PAGE_NAME);
-                //     }
-                // }
-            } else {
-                header('Location: '.BASE_URL.'login');
-            }
-        } 
-        
-        elseif (PAGE_ACCESS_TYPE == 'user') {
-            if ($user->isLoggedIn() === false) {
-                header('Location: '.BASE_URL.'login');
-            }
-        }
-
     }
 }
 

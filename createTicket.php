@@ -4,7 +4,6 @@
     $ticketcategories = $ticket->getAllTicketCategory();
 
     $requestType = isset($_REQUEST['type']) ? $_REQUEST['type'] : NULL;
-    echo $requestType;
 ?>
 
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
@@ -50,11 +49,14 @@
                                     </div>
                                 </div>
                                 
-                                <?php if(isset($_REQUEST['userId'])) { ?>
+                                <?php if(isset($_REQUEST['userId'])) {
+                                    $reportedInfo = $user->getUserById($_REQUEST['userId']);
+                                    
+                                    ?>
                                     <div class="col-md-12 mb-2">
                                         <div class="position-relative form-group">
                                             <label class="">Reporting</label>
-                                            <input class="form-control form-control-lg" value="<?php echo $user->getUserById($_REQUEST['userId'])->fullname;?>" disabled>
+                                            <input class="form-control form-control-lg" value="<?php echo $reportedInfo->fullname;?> (<?php echo $reportedInfo->mobile_no;?>)" disabled>
                                             <input class="form-control form-control-lg" value="<?php echo $_REQUEST['userId'];?>" name="reportedId" type="hidden">
                                         </div>
                                     </div>

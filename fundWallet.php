@@ -23,49 +23,37 @@ if (!empty($userInfo->userMeta->float_settings)) {
 
                         <div class="main-card mb-3 card">
                             <div class="card-header">
-                                <b>Share Float Wallet</b>
+                                <b>Fund Wallet</b>
                             </div>
                             <div class="card-body">
                                 <form class="" method="post" action="<?php echo BASE_URL; ?>controllers/float.php">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                             <div class="position-relative form-group 
-                                                <?php echo isset($myFloatSettings) ? "" : "d-none" ?>">
-                                                <label class="">Amount</label>
-                                                <small class="float-right">
-                                                    <strong>Sharable Balance: </strong>
-                                                    <span class="text-success">
-                                                        <?php echo CURRENCY . number_format($myFloatSettings->float_amount, 2) ?>
-                                                    </span>
-                                                </small>
-
-                                                <input id="amount" class="form-control amount" name="amount" type="number" step="0.1" min="1" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label class="">Receiver's Phone number</label>
-                                                <input class="form-control userPhone" name="userPhone" minlength="11" maxlength="11">
-                                            </div>
+                                    <div class="col-md-12">
+                                        <div class="position-relative form-group">
+                                            <label class="">Amount</label>
+                                            <input id="amount" class="form-control amount" name="amount" type="number" step="0.1" min="1" required>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group d-none">
-                                                <label class="">Receivers' Name</label>
-                                                <input class="form-control userName" name="userName" type="text" disabled>
-                                            </div>
+                                    <div class="col-md-12">
+                                        <div class="position-relative form-group">
+                                            <label class="">Select Payment Method</label>
+                                            <select class="form-control">
+                                                <option> ... Select Payment Method ... </option>
+                                                <option> Auto Funding </option>
+                                                <option> Manual Funding </option>
+                                            </select>
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <?php echo $utility->loadTransactionPinInput() ?>
+                                    <div class="col-md-12">
+                                        <div class="position-relative form-group">
+                                            <label class="">Amount to be Credited </label>
+                                            <input id="amount" class="form-control amount" name="amount" >
                                         </div>
                                     </div>
 
                                     <button class="mt-1 btn btn-primary shareFloat" name="shareFloat" type="submit" disabled>
-                                        <b><i class="fa fa-paper-plane"></i> Send </b>
+                                        <b><i class="fa fa-paper-plane"></i> Proceed </b>
                                     </button>
                                 </form>
                             </div>

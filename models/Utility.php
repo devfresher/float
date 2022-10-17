@@ -72,6 +72,11 @@ class Utility extends Database {
         $niceFormat = date($format, $timestamp);
 
         return $niceFormat;
+    } 
+    
+    public function dateCreated() {
+        $currDate = date("Y-m-d H:i:s");
+        return $currDate;
     }
 
     public function displayFormError()
