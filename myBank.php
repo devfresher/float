@@ -1,5 +1,6 @@
 <?php require "includes/session_check.php"; 
 $userBank = isset($userInfo->userMeta->bankInfo) ? $userInfo->userMeta->bankInfo : NULL;
+
 if($userBank != NULL) {
     $userBank = json_decode($userBank);
     $bankName = $userBank->bankName;
@@ -35,17 +36,10 @@ if($userBank != NULL) {
                                 <form class="" method="post" action="<?php echo BASE_URL;?>controllers/user.php">
 
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="position-relative form-group">
                                                 <label class="">Full Name</label>
-                                                <input class="form-control" value="<?php echo $userInfo->fullname;?>" disabled>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group">
-                                                <label class="">Username</label>
-                                                <input class="form-control" value="<?php echo $userInfo->username;?>" disabled>
+                                                <input class="form-control" value="<?php echo USER_FULLNAME;?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -71,6 +65,10 @@ if($userBank != NULL) {
                                                 <input class="form-control accountNo" value="<?php echo $accountNo;?>" name="accountNo" type="text" minlength="10" maxlength="10" required>
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-md-12">
+                                            <?php echo $utility->loadTransactionPinInput();?>
+                                        </div>
                                     </div>
                                     
                                     <button class="mt-1 btn btn-primary updateBankInfo" name="updateBankInfo" type="submit">
@@ -94,17 +92,31 @@ if($userBank != NULL) {
 <script>
     var load_form = true; //Should form load...?
 
-    // vending of Airtime...
-    $(".updateBankInfo").click(function(e) {
-        e.preventDefault();
-
+    $(".accountNo").on("keyup", function() {
         var bankName = $(".bankName").val();
         var accountName = $(".accountName").val();
         var accountNo = $(".accountNo").val();
 
+        if(bankName != '' && accountName != '' && accountNo.length == 10) {
+            showTxPin(true);
+        } else {
+            showTxPin(false);
+        }
+    });
+
+
+    // update banking info...
+    $(".updateBankInfo").click(function(e) {
+        e.preventDefault();
+        
+        var bankName = $(".bankName").val();
+        var accountName = $(".accountName").val();
+        var accountNo = $(".accountNo").val();
+        var transactPin = $(".pin").val();
+
         if(load_form) {
 				
-            if(bankName == '' || accountName == '' || accountNo == '') {
+            if(bankName == '' || accountName == '' || accountNo == '' || transactPin == '') {
                 swal.fire({
                     icon: "info",
                     html: "Please fill all filed before proceeding",
@@ -120,8 +132,23 @@ if($userBank != NULL) {
                     allowOutsideClick: false
                 })
             }
+            else if(accountNo.length < 10 || accountNo.length > 10) {
+                swal.fire({
+                    icon: "info",
+                    html: "Please enter a valid bank account number",
+                    title: "Missing field",
+                    allowOutsideClick: false
+                })
+            }
+            else if(transactPin.length < 4 || transactPin.length > 4) {
+                swal.fire({
+                    icon: "info",
+                    html: "Transaction pin should not be less or more than 4 digit",
+                    title: "Missing field",
+                    allowOutsideClick: false
+                })
+            }
             else {
-
                 var form = $(this).parents('form');
                 
                 swal.fire({

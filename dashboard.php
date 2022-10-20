@@ -3,8 +3,8 @@ require_once MODEL_DIR."Banks.php";
 $banks = new Banks($db);
 
 $fullUserInfo = $userInfo;
-$wallets = $userInfo->userMeta;
-$monnify =  $wallets->monnify; ?>
+$wallets = $userInfo->userMeta->wallets;
+$monnify =  $userInfo->userMeta->monnify; ?>
 
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
         
@@ -16,8 +16,10 @@ $monnify =  $wallets->monnify; ?>
 
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <?php include_once COMPONENT_DIR.'breadcrumb.php'; ?>
-                    
+                    <?php include_once COMPONENT_DIR.'breadcrumb.php'; 
+                    echo $utility->displayFormError();
+                    ?>
+
                     <div class="row">
                         <?php foreach($wallets as $headerIndex => $walletBalance) {
                             unset($wallets->monnify);

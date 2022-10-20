@@ -6,7 +6,7 @@
                     <span class="d-inline-block pr-2">
                         <i class="lnr-apartment opacity-6"></i>
                     </span>
-                    <span class="d-inline-block">Hello <strong><?php echo $userInfo->fullname;?></strong></span>
+                    <span class="d-inline-block">Hello <strong><?php echo USER_FULLNAME;?></strong></span>
                 </div>
             </div>
         </div>

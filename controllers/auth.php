@@ -28,7 +28,7 @@ if(isset($_POST["logAccount"])) {
     else {
         $sanitizedInputData = $validationResults;
         
-        $getUser = $user->getUserByUsername($sanitizedInputData['username']);
+        $getUser = $user->getUserByMobileNo($sanitizedInputData['username']);
         
         if($getUser) {
             $saved_password = $getUser->password;
@@ -54,10 +54,6 @@ if(isset($_POST["logAccount"])) {
 else if(isset($_POST["createAccount"])) {
     $myFilters = [
         'fullname' => [
-            'sanitizations' => 'string|trim',
-            'validations' => 'required',
-        ],
-        'username' => [
             'sanitizations' => 'string|trim',
             'validations' => 'required',
         ],
@@ -95,13 +91,9 @@ else if(isset($_POST["createAccount"])) {
         if($sanitizedInputData['password'] != $sanitizedInputData['passwordrep']) {
             $_SESSION['formErrorMessage'] = $language->password_not_match;
         }
-        else if($user->getUserByUsername($sanitizedInputData['username']) !== false) {
-            $_SESSION['formErrorMessage'] = $language->username_exist;
-        }
         else {
             $userData = [
                 "fullname" => $sanitizedInputData['fullname'],
-                "username" => $sanitizedInputData['username'],
                 "password" => $user->hashPassword($sanitizedInputData['password']),
                 "mobile_no" => $sanitizedInputData['mobileno'],
                 "email" => $sanitizedInputData['email'],

@@ -13,10 +13,6 @@ else {
             'email: Email Address' => [
                 'sanitizations' => 'email|trim',
                 'validations' => 'required',
-            ],
-            'mobile_no: Mobile Number' => [
-                'sanitizations' => 'string|trim',
-                'validations' => 'required|minlen:11|maxlen:11',
             ]
         ];
     
@@ -33,16 +29,14 @@ else {
         }
         else {
             $sanitizedInputData = $validationResults;
-            $mobileNo = $sanitizedInputData['mobile_no'];
             $email = $sanitizedInputData['email'];
-            $checkMobile = $user->getUserByMobileNo($mobileNo);
+            $checkEmail = $user->getUserByEmailAddress($email);
             
-            if($checkMobile !== false AND $checkMobile->id != $user->loggedInUser()->id) {
-                $_SESSION['formErrorMessage'] = $language->mobile_exist;
+            if($checkMobile !== false AND $checkEmail->id != $user->loggedInUser()->id) {
+                $_SESSION['formErrorMessage'] = $language->email_exist;
             }
             else {
                 $userData = [
-                    "mobile_no" => $mobileNo,
                     "email" => $email
                 ];
 
@@ -75,6 +69,10 @@ else {
             'accountNo: Account Number' => [
                 'sanitizations' => 'string|trim',
                 'validations' => 'required|minlen:10|maxlen:10',
+            ],
+            'pin: Transaction PIN' => [
+                'sanitizations' => 'number|trim',
+                'validations' => 'required|minlen:4|maxlen:4',
             ]
         ];
     
@@ -93,13 +91,22 @@ else {
             $sanitizedInputData = $validationResults;
 
             $accountNo = $sanitizedInputData['accountNo'];
+            $transactPin = $sanitizedInputData['pin'];
 
             // $accountNo = '274332910';
 
             // Searching for account number in json string
             $searchAza = $db->getRecFrmQry("SELECT * FROM users_meta WHERE `value` RLIKE '\"accountNo\":\"[[:<:]]".$accountNo."[[:>:]]\"'");
 
-            if(count($searchAza) > 0) {
+            $_SESSION['titleMessage'] = "Error";
+
+            if($transactPin == '0000') {
+                $_SESSION['errorMessage'] = $language->defaulttransactPIN;
+            }
+            else if($transactPin != $user->loggedInUser()->transact_pin) {
+                $_SESSION['errorMessage'] = $language->curr_transactpin_not_match;
+            }
+            else if(count($searchAza) > 0) {
                 $_SESSION['errorMessage'] = $language->accountno_exist;
                 $_SESSION['titleMessage'] = "Error";
             }
@@ -124,7 +131,6 @@ else {
                 }
                 else {
                     $_SESSION['errorMessage'] = $language->request_failed;
-                    $_SESSION['titleMessage'] = "Error";
                 }
             }
             header("Location: ".$_SERVER['HTTP_REFERER']);
@@ -199,12 +205,13 @@ else {
             exit();
         }
     }
+}
     
     // print_r($_POST);
     
     // print_r($user->loggedInUser());
     
-}
+// }
 
 
 ?>

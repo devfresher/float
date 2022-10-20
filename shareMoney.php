@@ -1,7 +1,4 @@
 <?php require "includes/session_check.php";
-if (!empty($userInfo->userMeta->float_settings)) {
-    $myFloatSettings = json_decode($userInfo->userMeta->float_settings);
-}
 ?>
 
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
@@ -23,29 +20,27 @@ if (!empty($userInfo->userMeta->float_settings)) {
 
                         <div class="main-card mb-3 card">
                             <div class="card-header">
-                                <b>Share Float Wallet</b>
+                                <b><?php echo PAGE_NAME; ?></b>
                             </div>
                             <div class="card-body">
-                                <form class="" method="post" action="<?php echo BASE_URL; ?>controllers/float.php">
+                                <form class="" method="post" action="<?php echo BASE_URL; ?>controllers/wallet.php">
                                     <div class="row">
                                         <div class="col-md-6">
-                                             <div class="position-relative form-group 
-                                                <?php echo isset($myFloatSettings) ? "" : "d-none" ?>">
+                                            <div class="position-relative form-group">
                                                 <label class="">Amount</label>
                                                 <small class="float-right">
-                                                    <strong>Sharable Balance: </strong>
+                                                    <strong>Main Balance: </strong>
                                                     <span class="text-success">
-                                                        <?php echo CURRENCY . number_format($myFloatSettings->float_amount, 2) ?>
+                                                        <?php echo CURRENCY . number_format($userInfo->userMeta->wallets->main_wallet, 2) ?>
                                                     </span>
                                                 </small>
-
                                                 <input id="amount" class="form-control amount" name="amount" type="number" step="0.1" min="1" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
-                                                <label class="">Receiver's Phone number</label>
+                                                <label>Receiver's Phone Number</label>
                                                 <input class="form-control userPhone" name="userPhone" minlength="11" maxlength="11">
                                             </div>
                                         </div>
@@ -64,8 +59,8 @@ if (!empty($userInfo->userMeta->float_settings)) {
                                         </div>
                                     </div>
 
-                                    <button class="mt-1 btn btn-primary shareFloat" name="shareFloat" type="submit" disabled>
-                                        <b><i class="fa fa-paper-plane"></i> Send </b>
+                                    <button class="mt-1 btn btn-primary shareMoney" name="shareMoney" type="submit" disabled>
+                                        <b><i class="fa fa-paper-plane"></i> Proceed </b>
                                     </button>
                                 </form>
                             </div>
@@ -82,23 +77,22 @@ if (!empty($userInfo->userMeta->float_settings)) {
 <script>
     const selfPhoneNo = "<?php echo $userInfo->mobile_no;?>"
 
-    function checkFields() {
+    function enableButton() {
         let userPhone = $('.userPhone').val()
         let userName = $('.userName').val()
         let amount = $('.amount').val()
         let pin = $('.pin').val()
 
         if (userName != '' && userPhone != '' && amount != '' && pin != '') {
-            $(".shareFloat").removeAttr('disabled')
+            $(".shareMoney").removeAttr('disabled')
         } else if (userName == '' || userPhone == '' || amount == '' || pin == '') {
-            $(".shareFloat").attr('disabled', true)
+            $(".shareMoney").attr('disabled', true)
         }
     }
 
-    // $(".userPhone").focusout(() =>{
-        
     $(".userPhone").keyup(() =>{
         let userPhone = $(".userPhone").val();
+
         if(selfPhoneNo == userPhone) {
             $('.userName').parent().addClass('d-none')
             showTxPin(false);
@@ -140,11 +134,11 @@ if (!empty($userInfo->userMeta->float_settings)) {
                         showTxPin(true);
                     }
     
-                    checkFields()
+                    enableButton()
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     swal.close()
-                    checkFields()
+                    enableButton()
                 }
             });
         } else {
@@ -154,14 +148,11 @@ if (!empty($userInfo->userMeta->float_settings)) {
     })
 
     $(".amount, .pin").keyup(() =>{
-        checkFields()
+        enableButton()
     })
-    
-    var load_form = true; //Should form load...?
 
-    // confirmation
-    // $(".shareFloat").click((e) => {
-    $(".shareFloat").click(function(e) {
+    var load_form = true;
+    $(".shareMoney").click(function (e) {
         e.preventDefault();
 
         var amount = $(".amount").val();
@@ -178,43 +169,21 @@ if (!empty($userInfo->userMeta->float_settings)) {
                     title: "Missing field",
                     allowOutsideClick: false
                 })
-            } else if (transactPin.length < 4 || transactPin.length > 4) {
-                swal.fire({
-                    icon: "info",
-                    html: "Transaction pin should not be more or less than 4 digit length",
-                    title: "Error",
-                    allowOutsideClick: false
-                })
-            } else if (userPhone.length < 11 || userPhone.length > 11) {
-                swal.fire({
-                    icon: "info",
-                    html: "Please enter a valid mobile number",
-                    title: "Missing field",
-                    allowOutsideClick: false
-                })
-            } else if (selfPhoneNo == userPhone) {
-                swal.fire({
-                    icon: "info",
-                    html: "You can not share float to yourself",
-                    title: "Missing field",
-                    allowOutsideClick: false
-                })
             } else {
-
                 var form = $(this).parents('form');
 
                 swal.fire({
                     icon: "question",
-                    html: "You are about to share float worth <?php echo CURRENCY;?>"+amount+" to "+userName,
+                    html: "You are about to share wallet worth <?php echo CURRENCY;?>"+amount+" to "+userName,
                     title: "Confirm",
                     allowOutsideClick: false,
                     showCancelButton: true,
                     showLoaderOnConfirm: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        form.append("<input type='hidden' name='shareFloat'/>");
+                        form.append("<input type='hidden' name='shareMoney'/>");
                         form.submit();
-                        $(".shareFloat").html("Please wait <i class='fa fa-spinner fa-spin'></i>").prop("disabled", true);
+                        $(".shareMoney").html("Please wait <i class='fa fa-spinner fa-spin'></i>").prop("disabled", true);
                     }
                 });
 

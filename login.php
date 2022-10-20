@@ -4,7 +4,7 @@
         <div class="app-container">
             <div class="h-100">
                 <div class="h-100 no-gutters row">
-                    <div class="d-none d-lg-block col-lg-4">                        
+                    <div class="d-none d-lg-block col-lg-4 signIn-Register">                        
                     </div>
                     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">

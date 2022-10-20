@@ -7,6 +7,11 @@
     height: 40px;
 }
 
+.sticky-recent-winners {
+    position: sticky;
+    top: 70px;
+}
+
 /* CSS BY KOLADE & DANIEL */
 .app-header .app-header__content {
     background-color: #ffcc00 !important;
@@ -79,7 +84,7 @@ h5 {
     background: transparent;
 }
 .btn:not(:disabled):not(.disabled) {
-    background: #3F6AD8;
+    /* background: #3F6AD8; */
 }
 .closed-sidebar.closed-sidebar-mobile .app-header {
     background-color: #ffcc00 !important;
@@ -151,7 +156,7 @@ strong .d-block .btn-transition{
     border-radius: 15px !important;
     padding-bottom: 50px;
 }
-.col-lg-4 {
+.signIn-Register {
     background-color: #ffcc00 !important;
     background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
     background-size: cover;
@@ -163,12 +168,44 @@ strong .d-block .btn-transition{
 .bg-white {
     background-color: #e2e2ff  !important;
 }
-.col-lg-5 {
+
+.app-login-box h4 div {
+    opacity: 100 !important;
+}
+
+.buy-win-item .card-header {
+    background-image: url('../images/mtn.jpg');
+    opacity: .5;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.buy-win-footer h6{
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.buy-win-item .buy-win-reward {
+    font-weight: 700;
+}
+
+.modal {
+    top: 59px;
+}
+
+.modal-backdrop, .blockOverlay {
+    position: relative;
+}
+
+.modal-header {
     background-color: #ffcc00 !important;
     background-image: linear-gradient(180deg,#ffcc00 10%, #ffcc00 100%);
     background-size: cover;
     background: #ffcc00;
 }
-.app-login-box h4 div {
-    opacity: 100 !important;
+
+li.list-group-item.sticky-border-bottom {
+    border: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,.125) !important;
 }

@@ -71,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-lg-flex d-xs-none col-lg-5">
+                    <div class="d-lg-flex d-xs-none col-lg-5 signIn-Register">
                     </div>
                     </div>
                 </div>

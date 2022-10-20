@@ -1,13 +1,7 @@
-<?php require "includes/session_check.php";
-if (!empty($userInfo->userMeta->float_settings)) {
-    $myFloatSettings = json_decode($userInfo->userMeta->float_settings);
-}
-?>
-
+<?php require "includes/session_check.php"; ?>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
 
     <?php include_once COMPONENT_DIR . 'topnav.php'; ?>
-
     <div class="app-main">
 
         <?php include_once "components/sidebar.php"; ?>
@@ -15,60 +9,40 @@ if (!empty($userInfo->userMeta->float_settings)) {
         <div class="app-main__outer">
             <div class="app-main__inner">
                 <?php include_once COMPONENT_DIR . 'breadcrumb.php'; ?>
-
+                <div style="margin-top: 2%; margin-bottom: 2%;" align="center"><img src="assets/images/mtn.jpg" width="120px"></div><br/>
                 <div class="row">
-
                     <div class="col-md-12">
-                        <?php echo $utility->displayFormError(); ?>
-
                         <div class="main-card mb-3 card">
                             <div class="card-header">
-                                <b>Share Float Wallet</b>
+                                <b><?php echo PAGE_NAME; ?></b>
                             </div>
                             <div class="card-body">
-                                <form class="" method="post" action="<?php echo BASE_URL; ?>controllers/float.php">
+                                <form class="buyairtime" method="post" action="#">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                             <div class="position-relative form-group 
-                                                <?php echo isset($myFloatSettings) ? "" : "d-none" ?>">
-                                                <label class="">Amount</label>
-                                                <small class="float-right">
-                                                    <strong>Sharable Balance: </strong>
-                                                    <span class="text-success">
-                                                        <?php echo CURRENCY . number_format($myFloatSettings->float_amount, 2) ?>
-                                                    </span>
-                                                </small>
-
-                                                <input id="amount" class="form-control amount" name="amount" type="number" step="0.1" min="1" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="position-relative form-group">
-                                                <label class="">Receiver's Phone number</label>
-                                                <input class="form-control userPhone" name="userPhone" minlength="11" maxlength="11">
+                                                <label class="">Phone number</label>
+                                                <input class="form-control" name="userPhone" minlength="11" maxlength="11" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                                <label class="">Amount</label>
+                                                <input class="form-control" name="amount" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                                <label class="">Payable Amount</label>
+                                                <input class="form-control" name="payable" disabled>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group d-none">
-                                                <label class="">Receivers' Name</label>
-                                                <input class="form-control userName" name="userName" type="text" disabled>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <?php echo $utility->loadTransactionPinInput() ?>
-                                        </div>
-                                    </div>
-
-                                    <button class="mt-1 btn btn-primary shareFloat" name="shareFloat" type="submit" disabled>
-                                        <b><i class="fa fa-paper-plane"></i> Send </b>
+                                    <button class="mt-1 btn btn-primary shareFloat" name="shareFloat" type="submit">
+                                        <b><i class="fa fa-paper-plane"></i> Purchase </b>
                                     </button>
                                 </form>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -77,10 +51,23 @@ if (!empty($userInfo->userMeta->float_settings)) {
     </div>
 </div>
 
-<?php include_once COMPONENT_DIR . "footer_script.php"; ?>
+
+<script src="https://topupsocket.com/gift/assets/scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="assets/scripts/main.d810cf0ae7f39f28f336.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    const selfPhoneNo = "<?php echo $userInfo->mobile_no;?>"
+    function showTxPin(isShow = false) {
+        if(isShow) {
+            $(".transctPinDiv").removeClass('d-none');
+        }
+        else {
+            $(".transctPinDiv").addClass('d-none');
+        }
+    }
+</script>
+<script>
+    const selfPhoneNo = "08129871451"
 
     function checkFields() {
         let userPhone = $('.userPhone').val()
@@ -111,7 +98,7 @@ if (!empty($userInfo->userMeta->float_settings)) {
         else if(userPhone.length == 11) {
             $.ajax({
                 type:'GET',
-                url: "<?php echo BASE_URL ?>api/user",
+                url: "https://topupsocket.com/gift/api/user",
                 data: {
                     phone: userPhone,
                 },
@@ -205,7 +192,7 @@ if (!empty($userInfo->userMeta->float_settings)) {
 
                 swal.fire({
                     icon: "question",
-                    html: "You are about to share float worth <?php echo CURRENCY;?>"+amount+" to "+userName,
+                    html: "You are about to share float worth &#8358;"+amount+" to "+userName,
                     title: "Confirm",
                     allowOutsideClick: false,
                     showCancelButton: true,
@@ -225,4 +212,8 @@ if (!empty($userInfo->userMeta->float_settings)) {
 
 </script>
 
-<?php include_once INCLUDES_DIR . "sweetalert.php"; ?>
+
+</body>
+
+
+</html>

@@ -12,12 +12,13 @@ class Language {
     	$this->account_not_active = 'Account not active';
     	$this->account_suspended = 'This account has been suspended from all transactions';
     	$this->incorrect_pin = 'Incorrect transaction pin';
+		$this->insufficient_fund = 'Insufficient fund';
     
     	$this->login_success = "Login successful";
     	$this->accountno_exist = "Account number already exist";
     	$this->mobile_exist = "Mobile number already exist";
     	$this->username_exist = "Username already exist";
-    	$this->username_noexist = "Username does not exist";
+    	$this->user_noexist = "User does not exist";
     	$this->item_exist = "Item trying to create already exists";
     	$this->item_does_not_exist = "Item(s) does not exist";
     	$this->email_exist = "User Email already exist";
@@ -41,6 +42,7 @@ class Language {
     
     	$this->saved = "Saved Successfully";
     	$this->created = "Created Successfully";
+		$this->txn_completed = "Transaction Completed";
     	$this->updated = "Updated successfully";
     	$this->deleted = "Deleted Successfully";
     
@@ -50,6 +52,9 @@ class Language {
     	$this->plan_exist = "Plan already exist";
     	$this->category_exist = "Category already exist";
     	$this->transaction_not_found = "Transaction could not be found";
+    	$this->buyWin_notActive = "Buy & Win Promo is currently not active, Kindly check back later";
+    	$this->promo_not_found = "Promo offer does not exist";
+    	$this->promo_expired = "Promo offer has expired. Kindly check other amazing offers";
 	}
 	
 }

@@ -40,7 +40,7 @@
                                 $menuName = $menu['title'];
                                 $slug = $menu['slug'];?>
                             
-                            <li>
+                            <li class="mt-3">
                                 <a href="<?php echo BASE_URL.$slug ?>">
                                     <i class="<?php echo $menuIcon; ?>"></i>
                                     <?php echo $menuName ?>
@@ -55,7 +55,7 @@
 
                             $subMenus = $pages->getSubMenu($parentMenuName);?>
 
-                            <li class="<?php echo (!isset($subMenus['slug']) OR empty($subMenus['slug'])) ? 'd-none':'' ?>">
+                            <li class="mt-3 <?php echo (!isset($subMenus['slug']) OR empty($subMenus['slug'])) ? 'd-none':'' ?>">
                                 <a href="#">
                                     <i class="<?php echo $menuIcon; ?>"></i>
                                     <?php echo $parentMenuName ?>
@@ -63,8 +63,8 @@
                                 </a>
                                 <ul>
                                     <?php foreach($subMenus['slug'] as $slugIndex => $slug) { ?>
-                                        <li>
-                                            <a href="<?php echo BASE_URL.$slug;?>">
+                                        <li class="mt-1">
+                                            <a href="<?php echo BASE_URL.$slug;?>" class="fo">
                                                 <i class="metismenu-icon"></i> <?php echo $subMenus['title'][$slugIndex];?>
                                             </a>
                                         </li>

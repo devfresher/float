@@ -30,8 +30,8 @@ if (SERVER != 'localhost' AND SERVER != '127.0.0.1' ) {
     define('DB_PASSWORD', 'topupsocket_gifts');
     define('DB_HOST', 'localhost');
 }else{
-    define('BASE_PATH', '/float/');
-    define('DB_NAME', 'floating');
+    define('BASE_PATH', '/deviceXtra/');
+    define('DB_NAME', 'deviceXtra');
     define('DB_USER', 'root');
     define('DB_PASSWORD', '');
     define('DB_HOST', 'localhost');
